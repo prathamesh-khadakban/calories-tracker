@@ -1,0 +1,47 @@
+Day 1
+
+- install react-fetch-hook
+- create new component => foods
+- seprate change color from app - so that we cant render other component uncessary -> DONE
+- Api for food -> https://rapidapi.com/apidojo/api/yummly2/
+- mapo got error -> which is not able to debug -> error of brackets require () instead of {}
+- lets search layout for listing items. tailwind?
+  - installation -> https://tailwindcss.com/docs/guides/create-react-app
+  - npm install @headlessui/react @heroicons/react
+- create seprate component for <li> items
+- remove uncessary types by condition on type="singlr recipe"
+- copy css from udemy-summary meetup project design?
+  - copy header file js and css
+  - add layou + MainNavigation + card components
+- deploy app on vercel
+- resolve deployment error
+
+
+Day - 2 
+- fix server api error - occur sometime
+  - Uncaught TypeError: Cannot read properties of undefined (reading 'display')
+- + and - functionality
+  - we need to work with our own object for better handling. -> DONE
+  - we need context and logic
+    - normal way 
+      - onclock handler call props.method and pass id and value
+      - on parent comp create handler 
+        - check item in array 
+        - update quantity / total vaule
+    - context way
+    - how nnot to write map() with setState
+      data.map((item) => {
+      return item.id === id
+        ? setData((current) => {
+            current.quantity = current.quantity + 1;
+          })
+        : data;
+    });
+    - correct way -  FINALLY DID IT BY OWN WAY -> IE UPDATE OBJECT BY SPREAD OPERATOR + oBJ DESCTURING
+      // check the given id is already present in data object set or not
+    const updatedData = data.map((eachobj) => {
+      return item.id === eachobj.id
+        ? { ...eachobj, quantity: eachobj.quantity + 1 }
+        : eachobj;
+    });
+    setData(updatedData);
