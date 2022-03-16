@@ -24,6 +24,7 @@ const Foods = () => {
       calories: 100,
       image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
       quantity: 0,
+      totalCalories: 0,
     },
     {
       id: 2,
@@ -31,6 +32,7 @@ const Foods = () => {
       calories: 500,
       image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3",
       quantity: 0,
+      totalCalories: 0,
     },
   ];
   const [data, setData] = useState(data_obj);
@@ -39,15 +41,25 @@ const Foods = () => {
     // check the given id is already present in data object set or not
     const updatedData = data.map((eachobj) => {
       return item.id === eachobj.id
-        ? { ...eachobj, quantity: eachobj.quantity + 1 }
+        ? {
+            ...eachobj,
+            quantity: eachobj.quantity + 1,
+            totalCalories: (eachobj.quantity + 1) * eachobj.calories,
+          }
         : eachobj;
     });
-
     setData((prev) => updatedData);
   };
 
+  const finalCaloriesCount = data.reduce((total, item) => {
+    return total + item.totalCalories;
+  }, 0);
+
+  //console.log(finalCaloriesCount);
+
   return (
     <div>
+      <h2>{`Final Calories intake = ${finalCaloriesCount}`}</h2>
       <ul className={classes.list}>
         {data &&
           data.map((item) => (
