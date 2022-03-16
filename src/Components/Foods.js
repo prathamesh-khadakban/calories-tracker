@@ -63,7 +63,11 @@ const Foods = () => {
       <ul className={classes.list}>
         {data &&
           data.map((item) => (
-            <FoodList item={item} addItem={addItemHandler}></FoodList>
+            <FoodList
+              key={item.id}
+              item={item}
+              addItem={addItemHandler}
+            ></FoodList>
           ))}
       </ul>
     </div>
