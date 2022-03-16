@@ -22,6 +22,7 @@ function FoodList({ addItem, item }) {
           <span>{item.quantity}</span>
           <button>-</button>
         </div>
+        <h3>{`Total Calories = ${item.totalCalories}`}</h3>
       </Card>
     </li>
   );
