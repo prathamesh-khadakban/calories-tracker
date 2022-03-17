@@ -7,7 +7,7 @@ function FoodList({ addItem, item }) {
     return addItem(item);
   };
   return (
-    <li key={item.id} className={classes.item}>
+    <li className={classes.item}>
       <Card>
         <img className={classes.image} src={item.image} alt="" />
         <div className={classes.content}>

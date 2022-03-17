@@ -19,7 +19,7 @@ const Foods = () => {
   //instead of api creating our own object and use unspash images
   const data_obj = [
     {
-      id: 1,
+      id: 0,
       name: "Salad",
       calories: 100,
       image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
@@ -27,7 +27,7 @@ const Foods = () => {
       totalCalories: 0,
     },
     {
-      id: 2,
+      id: 1,
       name: "Pizza",
       calories: 500,
       image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3",
@@ -38,17 +38,16 @@ const Foods = () => {
   const [data, setData] = useState(data_obj);
 
   const addItemHandler = (item) => {
-    // check the given id is already present in data object set or not
-    const updatedData = data.map((eachobj) => {
-      return item.id === eachobj.id
-        ? {
-            ...eachobj,
-            quantity: eachobj.quantity + 1,
-            totalCalories: (eachobj.quantity + 1) * eachobj.calories,
-          }
-        : eachobj;
-    });
-    setData((prev) => updatedData);
+    // Code refactoring by apply array destrcturing with spread operator
+    // for edit object
+    const updatedItem = {
+      ...item,
+      quantity: item.quantity + 1,
+      totalCalories: (item.quantity + 1) * item.calories,
+    };
+    const newData = [...data];
+    newData[item.id] = updatedItem;
+    setData(() => newData);
   };
 
   const finalCaloriesCount = data.reduce((total, item) => {
@@ -63,7 +62,11 @@ const Foods = () => {
       <ul className={classes.list}>
         {data &&
           data.map((item) => (
-            <FoodList item={item} addItem={addItemHandler}></FoodList>
+            <FoodList
+              key={item.id}
+              item={item}
+              addItem={addItemHandler}
+            ></FoodList>
           ))}
       </ul>
     </div>
